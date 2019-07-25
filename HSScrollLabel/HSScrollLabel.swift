@@ -10,6 +10,7 @@ import UIKit
 
 class HSScrollLabel: UIView {
     
+    /// 点击的回调
     var valueClourse: ((Int,String) -> Void)?
     
     deinit {
@@ -17,6 +18,7 @@ class HSScrollLabel: UIView {
         print("deinit")
     }
     
+    /// 传过来的数据
     var textDatas: Array<String>? {
         didSet {
             self.firstLabel.text = self.textDatas?[0]
@@ -29,6 +31,14 @@ class HSScrollLabel: UIView {
             }
         }
     }
+    
+    /// 定时器
+    lazy var timer: Timer = {
+        let timer = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
+        return timer
+    }()
+    
+    
     /// 当前点击的是第几个
     var currentIndex: Int = 0
     
@@ -64,10 +74,7 @@ class HSScrollLabel: UIView {
     }()
     
     
-    lazy var timer: Timer = {
-        let timer = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
-        return timer
-    }()
+
     
     
     
